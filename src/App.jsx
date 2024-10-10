@@ -11,11 +11,8 @@ function App() {
   return (
     <BrowserRouter>
     <Header/>
-    <Routes>
-      <Route path='/' element={<Home/>}></Route>
-      <Route path='/Transactions02' element={<Transactions02/>}></Route>
-    </Routes>
-    <Footer/>
+    
+    
     </BrowserRouter>
   )
 }
