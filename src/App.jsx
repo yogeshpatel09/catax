@@ -1,18 +1,25 @@
 
 import './App.css'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
-import Home from './pages/Home'
+
 import Header from './pages/Header'
-import Footer from './pages/Footer'
-import Transactions02 from './pages/Transactions02'
+import AddTransaction from './component/addTransaction'
+import Deposite from './component/Deposite'
+import Withdrawal from './component/Withdrawal'
+import Trade from './component/Trade'
+
 function App() {
   
 
   return (
     <BrowserRouter>
-    <Header/>
-    
-    
+    <Routes>
+      <Route path='/Header' element={<Header/>}></Route>
+      <Route path='/' element={<AddTransaction/>}></Route>
+      <Route path='/Deposite' element={<Deposite/>}></Route>
+      <Route path='/Withdrawal' element={<Withdrawal/>}></Route>
+      <Route path='/Trade' element={<Trade/>}></Route>
+    </Routes>  
     </BrowserRouter>
   )
 }

@@ -7,10 +7,13 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 import { IoCopyOutline } from 'react-icons/io5';
 import { MdDelete } from 'react-icons/md';
+import AddTransaction from '../component/addTransaction';
 function Header() {
   const [isEditable, setIsEditable] = useState(false)
   const [navbar, setNavbar] = useState(false)
   const [navDetails, setNavDetails] = useState(false)
+  const [addTransaction, setAddTransaction] = useState(false)
+  const [Filter , setFilter] = useState(false)
 
 
   const handleEdit = () => {
@@ -23,9 +26,21 @@ function Header() {
   const handleNavDeteail = () => {
     setNavDetails(!navDetails)
   }
-
+  const handleAddTransaction = () => {
+    setAddTransaction(!addTransaction)
+  }
+  const handleFilter =( ) => {
+    setFilter(!Filter)
+  }
   return (
-    <div>
+    <div className=''>
+      {Filter&&(
+        <div className="">
+        <AddTransaction/>
+      </div>
+      )}
+      
+
       <header>
         <div className="w-full h-12 bg-[#A54D79]">
           <div className="flex justify-start text-white items-center h-full container mx-auto gap-16 text-sm ">
@@ -59,12 +74,22 @@ function Header() {
               <p className='font-semibold text-lg'>Transactions</p>
               <div className=" flex gap-3 items-center text-sm">
                 <div className="">
-                  <select className='bg-[#A64D79]  py-2 rounded-sm text-white outline-none' name="" id="">
-                    <option className='px-4' value="">Add Transaction</option>
-                    <option value="">yogesh</option>
+                  <select onClick={handleAddTransaction} className='bg-[#A64D79]  py-2 rounded-sm text-white outline-none' name="" id="">
+                    <option className='bg-white text-black ' value="">Add  Transaction</option>
+
+                    <option className='bg-white text-black'>Deposit </option>
+                    <option className='bg-white text-black'>Withdrawal</option>
+                    <option className='bg-white text-black hover:bg-[#FFF3F9]'>Trade</option>
                   </select>
+                  {/* {addTransaction &&(
+                      <div className="">
+                        <div className="">Deposit </div>
+                        <div className="">Withdrawal</div>
+                        <div className="">Trade</div>
+                      </div>
+                    )} */}
                 </div>
-                <div className="text-[#A54D79]">
+                <div onClick={handleFilter} className="text-[#A54D79]">
                   <span>+</span>
                   <span>Add Filter</span>
                 </div>
@@ -231,31 +256,31 @@ function Header() {
 
                       </div>
                       <div className="">
-                      <div className=" flex items-center">
-                        <div className="flex items-center gap-2 w-1/2">
-                          <p>Gain</p>
-                        </div>
-                        <div className=" flex w-1/2">
-                          
-                         
-                          <p>₹0.00</p>
-                          <p><FaRegEye /></p>
-                        </div>
+                        <div className=" flex items-center">
+                          <div className="flex items-center gap-2 w-1/2">
+                            <p>Gain</p>
+                          </div>
+                          <div className=" flex w-1/2">
 
-                      </div>
+
+                            <p>₹0.00</p>
+                            <p><FaRegEye /></p>
+                          </div>
+
+                        </div>
                       </div>
                       <div className="">
-                      <div className="  flex items-center">
-                        <div className="flex items-center gap-2 w-1/2">
-                          <p>Fiat value</p>
-                        </div>
-                        <div className=" flex w-1/2">
-                         
-                          <p>₹0.0043</p>
-                          <p><FaRegEye /></p>
-                        </div>
+                        <div className="  flex items-center">
+                          <div className="flex items-center gap-2 w-1/2">
+                            <p>Fiat value</p>
+                          </div>
+                          <div className=" flex w-1/2">
 
-                      </div>
+                            <p>₹0.0043</p>
+                            <p><FaRegEye /></p>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
                   </div>
