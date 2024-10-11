@@ -8,6 +8,12 @@ function Deposite({ closeFilterModal, modalTransition }) {
     const [deposit, setDeposit] = useState("Deposit")
     const [transactionType, setTransactionType] = useState('Deposit');
     const [startDate, setStartDate] = useState(null);
+    const elements = ['+   TxHash', '+  TxSrc', '+  Tag', '+   Description']
+    const [clickElements, setClickedElement] = useState(null)
+
+    const handleClick = (index) => {
+        setClickedElement(index); // Set the index of the clicked element
+    };
 
     const handleStartDateChange = (date) => {
         setStartDate(date);
@@ -23,6 +29,8 @@ function Deposite({ closeFilterModal, modalTransition }) {
         setTransactionType(type);
     };
 
+
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center ">
             <div
@@ -31,7 +39,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
             ></div>
 
             <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white relative  ${modalTransition}`}>
-                <div className="">
+                <div className="max-h-[80vh] overflow-y-auto">
                     <div className="rounded-t-md bg-[#A54D79] p-5  shadow-sm flex justify-between">
                         <h1 className='text-sm text-white font-semibold'>Add Transaction</h1>
                         <span className=' text-white '><IoCloseSharp className='text-xl font-bold' /></span>
@@ -200,6 +208,11 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                 <div className="">
                                     <select name="" id="" className='bg-[#EFEFEF] w-full py-2'>
                                         <option value="">Select Wallet</option>
+                                        <option value="">Kraken (2)</option>
+                                        <option value="">CoinDCX</option>
+                                        <option value="">Unocoin</option>
+
+
                                     </select>
                                 </div>
                                 <div className="flex gap-2">
@@ -211,9 +224,38 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                     </select>
                                 </div>
                             </div>
-                            <div className="flex gap-4">
+
+                            <div>
+                                
+                                {clickElements !== null && (
+                                    <div className="flex flex-col gap-2 mb-4">
+                                        <label htmlFor="">Tag</label>
+                                        <select className='py-1 border' name="" id="">
+                                            <option value="">Select </option>
+                                        </select>
+                                        <label htmlFor="">Transaction Hash</label>
+                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                    </div>
+                                )}
+
+                                <div className="flex  gap-4">
+                                    {elements.map((Data, index) => (
+                                        <div key={index} className="flex gap-4 items-center">
+                                            {clickElements !== index && (
+                                                <div
+                                                    className="border rounded-full px-2 cursor-pointer"
+                                                    onClick={() => handleClick(index)}
+                                                >
+                                                    {Data}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            {/* <div className="flex gap-4">
                                 <div className="border rounded-full space-x-2 px-2">
-                                    <span>+</span>
+<span>+</span>
                                     <span>TxHash</span>
                                 </div>
                                 <div className="border rounded-full space-x-2 px-2">
@@ -228,19 +270,19 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                     <span>+</span>
                                     <span>Description</span>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="py-4 space-x-4">
                                 <input type="checkbox" />
                                 <label htmlFor="">Skip duplicate checks</label>
                             </div>
                             <div className="w-full py-4">
                                 <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
-                                Apply
+                                    Apply
                                 </button>
                             </div>
                         </div>
 
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
