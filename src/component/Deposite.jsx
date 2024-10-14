@@ -63,7 +63,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                 onClick={closeFilterModal} // Ensure this function is passed in as a prop or defined in the component
             ></div>
 
-            <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white relative  ${modalTransition}`}>
+            <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white  ${modalTransition}`}>
                 <div className="max-h-[80vh] overflow-y-auto">
                     <div className="rounded-t-md bg-[#A54D79] p-5  shadow-sm flex justify-between">
                         <h1 className='text-sm text-white font-semibold'>Add Transaction</h1>
@@ -71,7 +71,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                     </div>
                     <div className="w-full">
                         <div className="px-4">
-                            <p className="px-5 py-2 text-sm  text-[#5C5C5C]">
+                            <p className=" py-2 text-sm  text-[#5C5C5C]">
                                 When you receive coins from somewhere ex. purchase, airdrop, mining, income etc
                             </p>
 
@@ -131,7 +131,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
 
                         )}
                     </div> */}
-                            <div className="flex flex-col bg-[#FAFAFA] border ">
+                            <div className="flex flex-col bg-[#FAFAFA] border relative">
                                 <div onClick={handleDeposit} className='flex items-center justify-between p-2 gap-2 mt-1 '>
                                     <div className="flex gap-2 items-center">
                                         {transactionType === 'Deposit' ? (
@@ -156,7 +156,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                     </div>
                                 </div>
                                 {deposit && (
-                                    <div className="border absolute w-[93%] top-[145px] bg-[#FAFAFA]">
+                                    <div className="border absolute w-full top-[50px] bg-[#FAFAFA]">
                                         <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleTransactionChange('Deposit')}>
                                             <div className="flex gap-2 items-center">
                                                 <FaArrowDown className='text-[#3FBB00]' />
@@ -204,11 +204,8 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                 <span className='text-[#959595]'>(UTC)</span>
                             </div>
                             <div className="date-range-container flex items-center ">
-                                <label htmlFor="">
-
-                                </label>
-                                <div className=" z-10 flex items-center border w-full rounded-md px-2 ">
-                                    <FaCalendarAlt className=" text-gray-500" />
+                                <div className="flex border   rounded-md items-center px-1 py-1">
+                                    <FaCalendarAlt className="" />
                                     <DatePicker
                                         selected={startDate}
                                         onChange={handleStartDateChange}
@@ -216,7 +213,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                         startDate={startDate}
 
                                         placeholderText="Select Date"
-                                        className="outline-none w-full py-1 pl-4"
+                                        className="outline-none w-full pl-2  "
                                     />
                                 </div>
 
@@ -232,7 +229,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                         <span className='font-semibold'>Received</span>
                                     </div>
                                 </div>
-                                <div className="flex flex-col  bg-[#FAFAFA] border ">
+                                <div className="flex flex-col  bg-[#FAFAFA] border relative">
                                     <div onClick={handleSelectWallet} className='flex items-center justify-between p-2 gap-2 mt-1 '>
                                         <div className="flex gap-2 items-center">
                                             {selectWallettype === 'Kraken (2)' ? (
@@ -258,7 +255,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                         </div>
                                     </div>
                                     {selectWallet && (
-                                        <div className="border absolute w-[87%]  top-[330px] bg-[#FAFAFA]">
+                                        <div className="border absolute w-full  top-[50px] bg-[#FAFAFA]">
                                             <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleSelectWalletChange('Kraken (2)')}>
                                                 <div className="flex gap-2 items-center">
                                                 <img className='h-6' src="/reward.png" alt="" />
@@ -284,7 +281,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
 
                                 </div>
                                 <div className="flex gap-2">
-                                    <div className="flex flex-col w-1/2 bg-[#FAFAFA] border ">
+                                    <div className="flex flex-col w-1/2 bg-[#FAFAFA] border relative">
                                         <div onClick={handleSelectCoin} className='flex items-center justify-between p-2 gap-2 mt-1 '>
                                             <div className="flex gap-2 items-center">
                                                 {selectCoinType === 'INR' ? (
@@ -306,7 +303,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                             </div>
                                         </div>
                                         {selectCoin && (
-                                            <div className="border absolute w-[43%] top-[390px] bg-[#FAFAFA]">
+                                            <div className="border absolute w-full top-[50px] bg-[#FAFAFA]">
                                                 <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCoinChange('INR')}>
                                                     <div className="flex gap-2 items-center">
                                                         <span>INR</span>
@@ -331,7 +328,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
 
 
 
-                                    <select name="" id="" className='bg-[#EFEFEF] w-1/2 py-2'>
+                                    <select name="" id="" className='bg-[#EFEFEF] w-1/2 py-2 px-1 pr-1'>
                                         <option value=""> No.of Coin</option>
                                     </select>
                                 </div>
@@ -342,44 +339,35 @@ function Deposite({ closeFilterModal, modalTransition }) {
 
                                 <div className="flex flex-col gap-4">
                                     {elements.map((Data, index) => (
-                                        <div key={index} className="flex flex-col gap-2">
+                                        <div key={index} className="flex flex-col ">
                                             {clickElements[index] && (
-                                                <div className="flex flex-col gap-2 mb-4">
+                                                <div className="flex flex-col ">
                                                     {index === 0 && (
-                                                        <div className="flex flex-col gap-2 mb-4">
-                                                            <label htmlFor="">Transaction</label>
-                                                            <select className='py-1 border' name="" id="">
-                                                                <option value="">Select </option>
-                                                            </select>
+                                                        <div className="flex flex-col ">
+                                                            
                                                             <label htmlFor="">Transaction Hash</label>
-                                                            <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                            <input type="text" placeholder="Transaction Hash" className="border px-2 py-1 rounded outline-none" />
                                                         </div>
                                                     )}
-                                                    {index === 1 && (<div className="flex flex-col gap-2 mb-4">
+                                                    {index === 1 && (<div className="flex flex-col">
                                                         <label htmlFor="">Transaction Script</label>
-                                                        <select className='py-1 border' name="" id="">
-                                                            <option value="">Select </option>
-                                                        </select>
-                                                        <label htmlFor="">Text</label>
-                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                    
+                                                        <input type="text" placeholder="Transaction Script" className="border px-2 py-1 rounded outline-none" />
                                                     </div>
                                                     )}
-                                                    {index === 2 && (<div className="flex flex-col gap-2 mb-4">
+                                                    {index === 2 && (<div className="flex flex-col  py-1">
                                                         <label htmlFor="">Tag</label>
-                                                        <select className='py-1 border' name="" id="">
-                                                            <option value="">Select </option>
-                                                        </select>
-                                                        <label htmlFor="">Transaction Hash</label>
-                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                     <select name="" id="" className='border py-1'>
+                                                     
+                                                        <option value="">Tags</option>
+                                                     </select>
                                                     </div>
                                                     )}
-                                                    {index === 3 && (<div className="flex flex-col gap-2 mb-4">
+                                                    {index === 3 && (<div className="flex flex-col">
                                                         <label htmlFor="">Description</label>
-                                                        <select className='py-1 border' name="" id="">
-                                                            <option value="">Select </option>
-                                                        </select>
-                                                        <label htmlFor="">Text</label>
-                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                        
+                                                        
+                                                        <input type="text" placeholder="Text" className="border px-2 py-1 rounded outline-none" />
                                                     </div>
                                                     )}
                                                 </div>
@@ -421,7 +409,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                     <span>Description</span>
                                 </div>
                             </div> */}
-                            <div className="py-4 space-x-4">
+                            <div className="py-4 flex items-center gap-4">
                                 <input type="checkbox" />
                                 <label htmlFor="">Skip duplicate checks</label>
                             </div>
