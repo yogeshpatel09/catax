@@ -164,7 +164,7 @@ function Deposite() {
                                     </div>
                                 </div>
                                 {deposit && (
-                                    <div className="border absolute w-full top-[50px] bg-[#FAFAFA]">
+                                    <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
                                         <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleTransactionChange('Deposit')}>
                                             <div className="flex gap-2 items-center">
                                                 <FaArrowDown className='text-[#3FBB00]' />
@@ -263,7 +263,7 @@ function Deposite() {
                                         </div>
                                     </div>
                                     {selectWallet && (
-                                        <div className="border absolute w-full  top-[50px] bg-[#FAFAFA]">
+                                        <div className="border z-10 absolute w-full  top-[50px] bg-[#FAFAFA]">
                                             <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleSelectWalletChange('Kraken (2)')}>
                                                 <div className="flex gap-2 items-center">
                                                     <img className='h-6' src="/reward.png" alt="" />
@@ -311,7 +311,7 @@ function Deposite() {
                                             </div>
                                         </div>
                                         {selectCoin && (
-                                            <div className="border absolute w-full top-[50px] bg-[#FAFAFA]">
+                                            <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
                                                 <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCoinChange('INR')}>
                                                     <div className="flex gap-2 items-center">
                                                         <span>INR</span>
