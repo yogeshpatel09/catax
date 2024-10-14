@@ -27,34 +27,41 @@ function Deposite() {
 
     };
     const handleDeposit = () => {
-        setDeposit(!deposit)
-        
+        setDeposit(deposit => !deposit)
+        setDeposit(true)
     }
 
 
     const handleTransactionChange = (type) => {
 
         setTransactionType(type);
+        setDeposit(false)
     };
 
     const handleSelectWallet = () => {
         setSelectWallet(!selectWallet)
+        setSelectWallet(true)
     }
 
     const handleSelectWallettype = (type) => {
         setSelectWallettype(type)
+        
     }
     const handleSelectWalletChange = (type) => {
         setSelectWallettype(type)
+        setSelectWallet(false)
     }
     const handleSelectCoin = () => {
         setSelectCoin(!selectCoin)
+        setSelectCoin(true)
     }
     const coinType = (type) => {
         setSelectCoinType(type)
+
     }
     const handleCoinChange = (Type) => {
         setSelectCoinType(Type)
+        setSelectCoin(false)
     }
 
     return (
