@@ -8,11 +8,18 @@ function Deposite({ closeFilterModal, modalTransition }) {
     const [deposit, setDeposit] = useState("Deposit")
     const [transactionType, setTransactionType] = useState('Deposit');
     const [startDate, setStartDate] = useState(null);
-    const elements = ['+   TxHash', '+  TxSrc', '+  Tag', '+   Description']
-    const [clickElements, setClickedElement] = useState(null)
+    const [clickElements, setClickElement] = useState([false, false, false, false]);
+    const elements = ['+ TxHash', '+ TxSrc', '+ Tag', '+ Description'];
+    const [selectWallet, setSelectWallet] = useState("Select Wallet")
+    const [selectWallettype, setSelectWallettype] = useState("Select Wallet")
+    const [selectCoin, setSelectCoin] = useState('coin')
+    const [selectCoinType , setSelectCoinType] = useState('coin')
+
 
     const handleClick = (index) => {
-        setClickedElement(index); // Set the index of the clicked element
+        const newClickElement = [...clickElements];
+        newClickElement[index] = true;
+        setClickElement(newClickElement);
     };
 
     const handleStartDateChange = (date) => {
@@ -29,7 +36,25 @@ function Deposite({ closeFilterModal, modalTransition }) {
         setTransactionType(type);
     };
 
+    const handleSelectWallet = () => {
+        setSelectWallet(!selectWallet)
+    }
 
+    const handleSelectWallettype = (type) => {
+        setSelectWallettype(type)
+    }
+    const handleSelectWalletChange = (type) => {
+        setSelectWallettype(type)
+    }
+    const handleSelectCoin = () => {
+        setSelectCoin(!selectCoin)
+    }
+    const coinType = (type) =>{
+        setSelectCoinType(type)
+    }
+    const handleCoinChange = (Type) =>{
+        setSelectCoinType(Type)
+    }
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center ">
@@ -131,7 +156,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                     </div>
                                 </div>
                                 {deposit && (
-                                    <div className="border absolute w-full top-[145px] bg-[#FAFAFA]">
+                                    <div className="border absolute w-[93%] top-[145px] bg-[#FAFAFA]">
                                         <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleTransactionChange('Deposit')}>
                                             <div className="flex gap-2 items-center">
                                                 <FaArrowDown className='text-[#3FBB00]' />
@@ -198,6 +223,8 @@ function Deposite({ closeFilterModal, modalTransition }) {
 
 
                             </div>
+
+
                             <div className="w-full py-3 my-6 space-y-2 border px-4">
                                 <div className="">
                                     <div className="flex items-center gap-2">
@@ -205,43 +232,166 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                         <span className='font-semibold'>Received</span>
                                     </div>
                                 </div>
-                                <div className="">
-                                    <select name="" id="" className='bg-[#EFEFEF] w-full py-2'>
-                                        <option value="">Select Wallet</option>
-                                        <option value="">Kraken (2)</option>
-                                        <option value="">CoinDCX</option>
-                                        <option value="">Unocoin</option>
+                                <div className="flex flex-col  bg-[#FAFAFA] border ">
+                                    <div onClick={handleSelectWallet} className='flex items-center justify-between p-2 gap-2 mt-1 '>
+                                        <div className="flex gap-2 items-center">
+                                            {selectWallettype === 'Kraken (2)' ? (
+                                                <>
+                                                    <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>{selectWallettype}</span>
+                                                </>
+                                            ) : selectWallettype === 'CoinDCX' ? (
+                                                <>
+                                                    <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>{selectWallettype}</span>
+                                                </>
+                                            ) : (
+                                                <>
 
+                                                    <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>{selectWallettype}</span>
+                                                </>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <FaAngleDown />
+                                        </div>
+                                    </div>
+                                    {selectWallet && (
+                                        <div className="border absolute w-[87%]  top-[330px] bg-[#FAFAFA]">
+                                            <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleSelectWalletChange('Kraken (2)')}>
+                                                <div className="flex gap-2 items-center">
+                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>Kraken (2)</span>
+                                                </div>
 
-                                    </select>
+                                            </div>
+                                            <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleSelectWalletChange('CoinDCX')}>
+                                                <div className="flex gap-2 items-center">
+                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>CoinDCX</span>
+                                                </div>
+                                            </div>
+                                            <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleSelectWalletChange('Unocoin')}>
+                                                <div className="flex gap-2 items-center">
+                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <span>Unocoin</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    )}
+
                                 </div>
                                 <div className="flex gap-2">
-                                    <select name="" id="" className='bg-[#EFEFEF] w-1/2 py-2'>
-                                        <option value="">Coin</option>
-                                    </select>
+                                    <div className="flex flex-col w-1/2 bg-[#FAFAFA] border ">
+                                        <div onClick={handleSelectCoin} className='flex items-center justify-between p-2 gap-2 mt-1 '>
+                                            <div className="flex gap-2 items-center">
+                                                {selectCoinType === 'INR' ? (
+                                                    <>
+                                                        <span>{selectCoinType}</span>
+                                                    </>
+                                                ) : selectCoinType === 'USD' ? (
+                                                    <>
+                                                        <span>{selectCoinType}</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span>{selectCoinType}</span>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div>
+                                                <FaAngleDown />
+                                            </div>
+                                        </div>
+                                        {selectCoin && (
+                                            <div className="border absolute w-[43%] top-[390px] bg-[#FAFAFA]">
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCoinChange('INR')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>INR</span>
+                                                    </div>
+
+                                                </div>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('USD')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>USD</span>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('CAD')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>CAD</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    </div>
+
+
+
                                     <select name="" id="" className='bg-[#EFEFEF] w-1/2 py-2'>
                                         <option value=""> No.of Coin</option>
                                     </select>
                                 </div>
                             </div>
 
+
                             <div>
-                                
-                                {clickElements !== null && (
-                                    <div className="flex flex-col gap-2 mb-4">
-                                        <label htmlFor="">Tag</label>
-                                        <select className='py-1 border' name="" id="">
-                                            <option value="">Select </option>
-                                        </select>
-                                        <label htmlFor="">Transaction Hash</label>
-                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
-                                    </div>
-                                )}
+
+                                <div className="flex flex-col gap-4">
+                                    {elements.map((Data, index) => (
+                                        <div key={index} className="flex flex-col gap-2">
+                                            {clickElements[index] && (
+                                                <div className="flex flex-col gap-2 mb-4">
+                                                    {index === 0 && (
+                                                        <div className="flex flex-col gap-2 mb-4">
+                                                            <label htmlFor="">Transaction</label>
+                                                            <select className='py-1 border' name="" id="">
+                                                                <option value="">Select </option>
+                                                            </select>
+                                                            <label htmlFor="">Transaction Hash</label>
+                                                            <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                        </div>
+                                                    )}
+                                                    {index === 1 && (<div className="flex flex-col gap-2 mb-4">
+                                                        <label htmlFor="">Transaction Script</label>
+                                                        <select className='py-1 border' name="" id="">
+                                                            <option value="">Select </option>
+                                                        </select>
+                                                        <label htmlFor="">Text</label>
+                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                    </div>
+                                                    )}
+                                                    {index === 2 && (<div className="flex flex-col gap-2 mb-4">
+                                                        <label htmlFor="">Tag</label>
+                                                        <select className='py-1 border' name="" id="">
+                                                            <option value="">Select </option>
+                                                        </select>
+                                                        <label htmlFor="">Transaction Hash</label>
+                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                    </div>
+                                                    )}
+                                                    {index === 3 && (<div className="flex flex-col gap-2 mb-4">
+                                                        <label htmlFor="">Description</label>
+                                                        <select className='py-1 border' name="" id="">
+                                                            <option value="">Select </option>
+                                                        </select>
+                                                        <label htmlFor="">Text</label>
+                                                        <input type="text" placeholder="" className="border px-2 py-1 rounded outline-none" />
+                                                    </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
 
                                 <div className="flex  gap-4">
                                     {elements.map((Data, index) => (
                                         <div key={index} className="flex gap-4 items-center">
-                                            {clickElements !== index && (
+                                            {!clickElements[index] && (
                                                 <div
                                                     className="border rounded-full px-2 cursor-pointer"
                                                     onClick={() => handleClick(index)}

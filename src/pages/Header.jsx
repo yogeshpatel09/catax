@@ -13,8 +13,9 @@ function Header() {
   const [navbar, setNavbar] = useState(false)
   const [navDetails, setNavDetails] = useState(false)
   const [addTransaction, setAddTransaction] = useState(false)
-  const [Filter , setFilter] = useState(false)
-
+  const [Filter, setFilter] = useState(false)
+  const [view, setView] = useState(false)
+  const [isToggled, setIsToggled] = useState(false);
 
   const handleEdit = () => {
     setIsEditable(!isEditable)
@@ -29,17 +30,23 @@ function Header() {
   const handleAddTransaction = () => {
     setAddTransaction(!addTransaction)
   }
-  const handleFilter =( ) => {
+  const handleFilter = () => {
     setFilter(!Filter)
   }
+  const handleViewClick = () => {
+    setView(!view)
+  }
+  const handleToggle = () => {
+    setIsToggled(prevState => !prevState);
+};
   return (
     <div className=''>
-      {Filter&&(
+      {Filter && (
         <div className="">
-        <AddTransaction/>
-      </div>
+          <AddTransaction />
+        </div>
       )}
-      
+
 
       <header>
         <div className="w-full h-12 bg-[#A54D79]">
@@ -69,7 +76,7 @@ function Header() {
 
       <div className="">
         <div className="flex justify-center items-center">
-          <div className="w-[90%]">
+          <div className="w-[90%] relative">
             <div className="flex justify-between w-full py-6">
               <p className='font-semibold text-lg'>Transactions</p>
               <div className=" flex gap-3 items-center text-sm">
@@ -106,17 +113,38 @@ function Header() {
                   <option className='text-[#9B9B9B]' value="">All Wallets</option>
                 </select>
               </div>
-              <div className=" flex items-center border rounded-full px-2">
-                <select className='' name="" id="">
-                  <option value="">View</option>
-                </select>
+              <div className=" flex items-center border rounded-full px-6">
+                <div onClick={handleViewClick} className='flex justify-between items-center gap-10' name="" id="">
+                  <div value="">View</div>
+                  <FaAngleDown />
+                </div>
+
               </div>
-              <div className=" flex items-center border rounded-full px-2">
-                <select className='' name="" id="">
+
+              <div className=" flex items-center border rounded-full px-4">
+                <select className='outline-none' name="" id="">
                   <option value="">sort by recent</option>
+                  <option value="">Most recent</option>
+                  <option value="">Oldest first</option>
+                  <option value="">Highest gains</option>
+                  <option value="">Lowest gains</option>
+                  <option value="">Highest value</option>
+                  <option value="">Lowest value</option>
                 </select>
               </div>
+              
             </div>
+            {view && (
+                <div className="flex items-center absolute right- ">
+                  Show deleted
+                  <button
+                    onClick={handleToggle}
+                    className={`p-2 rounded ${isToggled ? 'bg-green-500 text-white' : 'bg-gray-300 text-black'}`}
+                  >
+                    {isToggled ? 'On' : 'Off'}
+                  </button>
+                </div>
+              )}
             <div className="flex gap-2 py-8 ">
               <div className=" flex items-center px-2">
                 <select className='bg-[#A54D79] text-white px-2 border rounded-full outline-none' name="" id="">
