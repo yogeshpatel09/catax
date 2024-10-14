@@ -45,7 +45,7 @@ function Deposite() {
 
     const handleSelectWallettype = (type) => {
         setSelectWallettype(type)
-        
+
     }
     const handleSelectWalletChange = (type) => {
         setSelectWallettype(type)
@@ -68,17 +68,17 @@ function Deposite() {
         <div className="fixed inset-0 z-50 flex items-center justify-center ">
             <div
                 className="absolute inset-0 bg-black/50 opacity-75"
-                // Ensure this function is passed in as a prop or defined in the component
+            // Ensure this function is passed in as a prop or defined in the component
             ></div>
 
             <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white  `}>
-                <div className="max-h-[80vh] overflow-y-auto">
+                <div className="">
                     <div className="rounded-t-md bg-[#A54D79] p-5  shadow-sm flex justify-between">
                         <h1 className='text-sm text-white font-semibold'>Add Transaction</h1>
                         <span className=' text-white '><IoCloseSharp className='text-xl font-bold' /></span>
                     </div>
-                    <div className="w-full">
-                        <div className="px-4">
+                    <div className="w-full ">
+                        <div className="px-4 max-h-[75vh] overflow-y-auto">
                             <p className=" py-2 text-sm  text-[#5C5C5C]">
                                 When you receive coins from somewhere ex. purchase, airdrop, mining, income etc
                             </p>
@@ -422,15 +422,18 @@ function Deposite() {
                                 <label htmlFor="">Skip duplicate checks</label>
                             </div>
 
+
                         </div>
+                        
 
                     </div>
+
                 </div>
                 <div className="w-full py-4">
-                    <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
-                        Apply
-                    </button>
-                </div>
+                            <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
+                                Apply
+                            </button>
+                        </div>
             </div>
 
         </div>
