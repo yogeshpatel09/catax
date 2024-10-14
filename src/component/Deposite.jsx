@@ -4,16 +4,16 @@ import { FaAngleDoubleRight, FaAngleDown, FaArrowDown, FaCalendarAlt } from 'rea
 import { FaRightLeft } from 'react-icons/fa6';
 import { IoCloseSharp } from 'react-icons/io5';
 
-function Deposite({ closeFilterModal, modalTransition }) {
-    const [deposit, setDeposit] = useState("Deposit")
+function Deposite() {
+    const [deposit, setDeposit] = useState(false)
     const [transactionType, setTransactionType] = useState('Deposit');
     const [startDate, setStartDate] = useState(null);
     const [clickElements, setClickElement] = useState([false, false, false, false]);
     const elements = ['+ TxHash', '+ TxSrc', '+ Tag', '+ Description'];
-    const [selectWallet, setSelectWallet] = useState("Select Wallet")
+    const [selectWallet, setSelectWallet] = useState(false)
     const [selectWallettype, setSelectWallettype] = useState("Select Wallet")
-    const [selectCoin, setSelectCoin] = useState('coin')
-    const [selectCoinType , setSelectCoinType] = useState('coin')
+    const [selectCoin, setSelectCoin] = useState(false)
+    const [selectCoinType, setSelectCoinType] = useState('coin')
 
 
     const handleClick = (index) => {
@@ -28,6 +28,7 @@ function Deposite({ closeFilterModal, modalTransition }) {
     };
     const handleDeposit = () => {
         setDeposit(!deposit)
+        
     }
 
 
@@ -49,10 +50,10 @@ function Deposite({ closeFilterModal, modalTransition }) {
     const handleSelectCoin = () => {
         setSelectCoin(!selectCoin)
     }
-    const coinType = (type) =>{
+    const coinType = (type) => {
         setSelectCoinType(type)
     }
-    const handleCoinChange = (Type) =>{
+    const handleCoinChange = (Type) => {
         setSelectCoinType(Type)
     }
 
@@ -60,10 +61,10 @@ function Deposite({ closeFilterModal, modalTransition }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center ">
             <div
                 className="absolute inset-0 bg-black/50 opacity-75"
-                onClick={closeFilterModal} // Ensure this function is passed in as a prop or defined in the component
+                // Ensure this function is passed in as a prop or defined in the component
             ></div>
 
-            <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white  ${modalTransition}`}>
+            <div className={`z-10 ml-auto h-[90vh] w-1/2 rounded-md bg-white  `}>
                 <div className="max-h-[80vh] overflow-y-auto">
                     <div className="rounded-t-md bg-[#A54D79] p-5  shadow-sm flex justify-between">
                         <h1 className='text-sm text-white font-semibold'>Add Transaction</h1>
@@ -258,20 +259,20 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                         <div className="border absolute w-full  top-[50px] bg-[#FAFAFA]">
                                             <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleSelectWalletChange('Kraken (2)')}>
                                                 <div className="flex gap-2 items-center">
-                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <img className='h-6' src="/reward.png" alt="" />
                                                     <span>Kraken (2)</span>
                                                 </div>
 
                                             </div>
                                             <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleSelectWalletChange('CoinDCX')}>
                                                 <div className="flex gap-2 items-center">
-                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <img className='h-6' src="/reward.png" alt="" />
                                                     <span>CoinDCX</span>
                                                 </div>
                                             </div>
                                             <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleSelectWalletChange('Unocoin')}>
                                                 <div className="flex gap-2 items-center">
-                                                <img className='h-6' src="/reward.png" alt="" />
+                                                    <img className='h-6' src="/reward.png" alt="" />
                                                     <span>Unocoin</span>
                                                 </div>
 
@@ -344,29 +345,29 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                                 <div className="flex flex-col ">
                                                     {index === 0 && (
                                                         <div className="flex flex-col ">
-                                                            
+
                                                             <label htmlFor="">Transaction Hash</label>
                                                             <input type="text" placeholder="Transaction Hash" className="border px-2 py-1 rounded outline-none" />
                                                         </div>
                                                     )}
                                                     {index === 1 && (<div className="flex flex-col">
                                                         <label htmlFor="">Transaction Script</label>
-                                                    
+
                                                         <input type="text" placeholder="Transaction Script" className="border px-2 py-1 rounded outline-none" />
                                                     </div>
                                                     )}
                                                     {index === 2 && (<div className="flex flex-col  py-1">
                                                         <label htmlFor="">Tag</label>
-                                                     <select name="" id="" className='border py-1'>
-                                                     
-                                                        <option value="">Tags</option>
-                                                     </select>
+                                                        <select name="" id="" className='border py-1'>
+
+                                                            <option value="">Tags</option>
+                                                        </select>
                                                     </div>
                                                     )}
-                                                    {index === 3 && (<div className="flex flex-col">
+                                                    {index === 3 && (<div className="flex flex-col mb-4">
                                                         <label htmlFor="">Description</label>
-                                                        
-                                                        
+
+
                                                         <input type="text" placeholder="Text" className="border px-2 py-1 rounded outline-none" />
                                                     </div>
                                                     )}
@@ -413,16 +414,18 @@ function Deposite({ closeFilterModal, modalTransition }) {
                                 <input type="checkbox" />
                                 <label htmlFor="">Skip duplicate checks</label>
                             </div>
-                            <div className="w-full py-4">
-                                <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
-                                    Apply
-                                </button>
-                            </div>
+
                         </div>
 
                     </div>
                 </div>
+                <div className="w-full py-4">
+                    <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
+                        Apply
+                    </button>
+                </div>
             </div>
+
         </div>
     )
 }
