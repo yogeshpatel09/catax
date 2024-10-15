@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { FaAngleDoubleRight, FaAngleDown, FaArrowDown, FaCalendarAlt } from 'react-icons/fa';
+import { FaAngleDoubleRight, FaAngleDown, FaArrowDown, FaCalendarAlt, FaInfoCircle } from 'react-icons/fa';
 import { FaRightLeft } from 'react-icons/fa6';
 import { IoCloseSharp } from 'react-icons/io5';
 
@@ -14,6 +14,8 @@ function Deposite() {
     const [selectWallettype, setSelectWallettype] = useState("Select Wallet")
     const [selectCoin, setSelectCoin] = useState(false)
     const [selectCoinType, setSelectCoinType] = useState('coin')
+    const [worth, setWorth] = useState(false)
+    const [isButtonVisible, setIsButtonVisible] = useState(true);
 
 
     const handleClick = (index) => {
@@ -62,6 +64,11 @@ function Deposite() {
     const handleCoinChange = (Type) => {
         setSelectCoinType(Type)
         setSelectCoin(false)
+    }
+    const handleWorth = () => {
+        setWorth(!worth)
+        setWorth(true);
+        setIsButtonVisible(false);
     }
 
     return (
@@ -230,7 +237,7 @@ function Deposite() {
                             </div>
 
 
-                            <div className="w-full py-3 my-6 space-y-2 border px-4">
+                            <div className="w-full py-3 mt-6 space-y-2 border px-4">
                                 <div className="">
                                     <div className="flex items-center gap-2">
                                         <FaArrowDown className='text-[#3FBB00]' />
@@ -289,60 +296,84 @@ function Deposite() {
 
                                 </div>
                                 <div className="flex gap-2">
-                                    <div className="flex flex-col w-1/2 bg-[#FAFAFA] border relative">
-                                        <div onClick={handleSelectCoin} className='flex items-center justify-between p-2 gap-2 mt-1 '>
-                                            <div className="flex gap-2 items-center">
-                                                {selectCoinType === 'INR' ? (
-                                                    <>
-                                                        <span>{selectCoinType}</span>
-                                                    </>
-                                                ) : selectCoinType === 'USD' ? (
-                                                    <>
-                                                        <span>{selectCoinType}</span>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <span>{selectCoinType}</span>
-                                                    </>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <FaAngleDown />
-                                            </div>
-                                        </div>
-                                        {selectCoin && (
-                                            <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCoinChange('INR')}>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span>INR</span>
-                                                    </div>
 
-                                                </div>
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('USD')}>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span>USD</span>
-                                                    </div>
-                                                </div>
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('CAD')}>
-                                                    <div className="flex gap-2 items-center">
-                                                        <span>CAD</span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        )}
-
-                                    </div>
 
 
 
                                     <select name="" id="" className='bg-[#EFEFEF] w-1/2 py-2 px-1 pr-1'>
-                                        <option value=""> No.of Coin</option>
+                                        <option value="">Coin</option>
                                     </select>
+                                    <input type="text"
+                                        className='w-1/2 py-2 px-1 pr-1 border'
+                                        placeholder='Number of coin...' />
                                 </div>
                             </div>
 
+                            <div className="flex justify-end text-xs ">
+                                {isButtonVisible && ( 
+                                    <button onClick={handleWorth} className='text-blue-700 '>Set Worth</button>
+                                )}
+                            </div>
+                            {worth && (
+                                <div className="">
+                                    <div className="flex items-center gap-1 text-xs mb-2">
+                                        <p>Net Worth</p>
+                                        <FaInfoCircle />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <div className="flex flex-col w-1/2 bg-[#FAFAFA] border relative">
+                                            <div onClick={handleSelectCoin} className='flex items-center justify-between py-1 px-2 gap-2 mt-1 '>
+                                                <div className="flex gap-2 items-center">
+                                                    {selectCoinType === 'INR' ? (
+                                                        <>
+                                                            <span>{selectCoinType}</span>
+                                                        </>
+                                                    ) : selectCoinType === 'USD' ? (
+                                                        <>
+                                                            <span>{selectCoinType}</span>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <span>{selectCoinType}</span>
+                                                        </>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <FaAngleDown />
+                                                </div>
+                                            </div>
+                                            {selectCoin && (
+                                                <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
+                                                    <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCoinChange('INR')}>
+                                                        <div className="flex gap-2 items-center">
+                                                            <span>INR</span>
+                                                        </div>
 
+                                                    </div>
+                                                    <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('USD')}>
+                                                        <div className="flex gap-2 items-center">
+                                                            <span>USD</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCoinChange('CAD')}>
+                                                        <div className="flex gap-2 items-center">
+                                                            <span>CAD</span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                        </div>
+                                        <div className="w-1/2">
+                                            <input type="text"
+                                                className='border py-2 px-2 w-full'
+                                                placeholder='Amount..'
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             <div>
 
                                 <div className="flex flex-col gap-4">
@@ -424,16 +455,16 @@ function Deposite() {
 
 
                         </div>
-                        
+
 
                     </div>
 
                 </div>
                 <div className="w-full py-4">
-                            <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
-                                Apply
-                            </button>
-                        </div>
+                    <button className='bg-[#A64D79] w-full text-white rounded-md py-2'>
+                        Apply
+                    </button>
+                </div>
             </div>
 
         </div>
