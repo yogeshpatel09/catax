@@ -315,7 +315,7 @@ function Deposite() {
                                 )}
                             </div>
                             {worth && (
-                                <div className="">
+                                <div className="mt-4">
                                     <div className="flex items-center gap-1 text-xs mb-2">
                                         <p>Net Worth</p>
                                         <FaInfoCircle />
