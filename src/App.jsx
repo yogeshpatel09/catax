@@ -7,6 +7,7 @@ import AddTransaction from './component/addTransaction'
 import Deposite from './component/Deposite'
 import Withdrawal from './component/Withdrawal'
 import Trade from './component/Trade'
+import Tax from './component/Tax'
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
       <Route path='/Deposite' element={<Deposite/>}></Route>
       <Route path='/Withdrawal' element={<Withdrawal/>}></Route>
       <Route path='/Trade' element={<Trade/>}></Route>
+      <Route path='/Tax' element={<Tax/>}></Route>
     </Routes>  
     </BrowserRouter>
   )
