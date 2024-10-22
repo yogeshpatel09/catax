@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaAngleDown, FaInfoCircle } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { IoMdCopy } from "react-icons/io";
+import { CiCircleInfo } from "react-icons/ci";
 
 function Tax() {
     const [year, setyYear] = useState(false)
@@ -13,34 +14,53 @@ function Tax() {
         setSelectYear(year);
         setYearDropdown(false);
     };
-    const [selectCountry, setSelectCountry] = useState(false)
+    const [selectCountry, setSelectCountry] = useState('')
     const [selectCountryType, setSelectCountryType] = useState('Select Country')
     const handleSelectCountry = () => {
         setSelectCountry(!selectCountry)
-        setSelectCountry(true)
+        
     }
     const handleCountryChange = (Type) => {
         setSelectCountryType(Type)
         setSelectCountry(false)
     }
-    const [selectCurrency, setSelectCurrency] = useState(false)
+    const [selectCurrency, setSelectCurrency] = useState('')
     const [selectCurrencyType, setSelectCurrencyType] = useState('Select courrency')
     const handleSelectCurrency = () => {
         setSelectCurrency(!selectCurrency)
-        setSelectCurrency(true)
+       
     }
     const handleCurrencyChange = (Type) => {
         setSelectCurrencyType(Type)
         setSelectCurrency(false)
     }
-    const [stander,setStander] = useState(false)
-    const handleStandardReport = () =>{
-        setStander(!stander)
-        setStander(stander = '' ? 'pink':'pink')
+    const [selectCost, setSelectCost] = useState('')
+    const [selectCostType, setSelectCostType] = useState('FIFO')
+    const handleSelectCost = () => {
+        setSelectCost(!selectCost)
+       
     }
-    const[ standerclick,setStanderclick] = useState('')
+    const handleCostChange = (Type) => {
+        setSelectCostType(Type)
+        setSelectCost(false)
+    }
+    const [selectReport, setSelectReport] = useState("standard");
+    const [stander, setStander] = useState(true);
+    const [advanced, setAdvanced] = useState(false)
 
-    
+    const handleSelectReport = (reportType) => {
+        setSelectReport(reportType);
+        setStander(reportType === "standard");
+        setAdvanced(reportType === "advanced")
+    };
+
+    const [transaction, setTransaction] = useState(107);
+    const totalTransaction = 5000;
+
+    const prograessPercentage = (transaction / totalTransaction) * 100;
+
+
+
     return (
         <div>
             <header>
@@ -72,10 +92,10 @@ function Tax() {
                 <div className="w-[90%] pb-4">
                     <div className="flex items-center gap-2 py-6">
                         <div>
-                            <span onClick={handleYear} className='font-semibold relative'>
+                            <span onClick={handleYear} className='font-semibold relative px-4 text-center  py-1'>
                                 {selectYear}
                                 {year && (
-                                    <div className="bg-[#FBFBFB] absolute">
+                                    <div className="bg-[#FBFBFB] absolute  w-full space-y-2">
                                         <div className='hover:bg-[#FFF3F9]' onClick={() => handleYearSelect("2023 - 2024")} >
                                             2023 - 2024
                                         </div>
@@ -105,19 +125,25 @@ function Tax() {
                                     <div className="flex flex-col w-full bg-[#FAFAFA] border relative">
                                         <div onClick={handleSelectCountry} className='flex items-center justify-between py-1 px-2 gap-2 mt-1 '>
                                             <div className="flex gap-2 items-center">
-                                                {selectCountryType === 'INR' ? (
+                                                {selectCountryType === 'India' ? (
                                                     <>
                                                         <img src="india.png" alt="" className='h-6' />
                                                         <span>{selectCountryType}</span>
                                                     </>
-                                                ) : selectCountryType === 'USD' ? (
+                                                ) : selectCountryType === 'United State Of America' ? (
                                                     <>
                                                         <img src="us.png" alt="" className='h-6' />
                                                         <span>{selectCountryType}</span>
                                                     </>
-                                                ) : (
+                                                ): selectCountryType === 'Canada' ? (
                                                     <>
                                                         <img src="canada.png" alt="" className='h-6' />
+                                                        <span>{selectCountryType}</span>
+                                                    </>
+                                                )
+                                                 : (
+                                                    <>
+                                                        <img src="" alt="" className='h-6' />
                                                         <span>{selectCountryType}</span>
                                                     </>
                                                 )}
@@ -128,23 +154,23 @@ function Tax() {
                                         </div>
                                         {selectCountry && (
                                             <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCountryChange('INR')}>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCountryChange('India')}>
                                                     <div className="flex gap-2 items-center">
                                                         <img src="india.png" alt="" className='h-4' />
-                                                        <span>INR</span>
+                                                        <span>India</span>
                                                     </div>
 
                                                 </div>
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCountryChange('USD')}>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCountryChange('United State Of America')}>
                                                     <div className="flex gap-2 items-center">
                                                         <img src="us.png" alt="" className='h-4' />
-                                                        <span>USD</span>
+                                                        <span>United State Of America</span>
                                                     </div>
                                                 </div>
-                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCountryChange('CAD')}>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCountryChange('Canada')}>
                                                     <div className="flex gap-2 items-center">
                                                         <img src="canada.png" alt="" className='h-4' />
-                                                        <span>CAD</span>
+                                                        <span>Canada</span>
                                                     </div>
 
                                                 </div>
@@ -168,9 +194,15 @@ function Tax() {
                                                         <img src="us.png" alt="" className='h-6' />
                                                         <span>{selectCurrencyType}</span>
                                                     </>
-                                                ) : (
+                                                ) : selectCurrencyType === 'CAD' ? (
                                                     <>
                                                         <img src="canada.png" alt="" className='h-6' />
+                                                        <span>{selectCurrencyType}</span>
+                                                    </>
+                                                )
+                                                : (
+                                                    <>
+                                                        <img src="" alt="" className='h-6' />
                                                         <span>{selectCurrencyType}</span>
                                                     </>
                                                 )}
@@ -208,9 +240,49 @@ function Tax() {
                                 </div>
                                 <div className="w-full">
                                     <span>Cost Basic Method</span>
-                                    <div className="flex items-center w-full bg-[#FFFFFF] text-[#A1A1A1] px-2 py-1 justify-between">
-                                        <span>FIFO</span>
-                                        <FaAngleDown />
+                                    <div className="flex flex-col w-full bg-[#FAFAFA] border relative">
+                                        <div onClick={handleSelectCost} className='flex items-center justify-between py-1 px-2 gap-2 mt-1 '>
+                                            <div className="flex gap-2 items-center">
+                                                {selectCostType === 'INR' ? (
+                                                    <>
+                                                        <span>{selectCostType}</span>
+                                                    </>
+                                                ) : selectCostType === 'USD' ? (
+                                                    <>
+                                                        <span>{selectCostType}</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span>{selectCostType}</span>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div>
+                                                <FaAngleDown />
+                                            </div>
+                                        </div>
+                                        {selectCost && (
+                                            <div className="border z-10 absolute w-full top-[50px] bg-[#FAFAFA]">
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9] ' onClick={() => handleCostChange('INR')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>INR</span>
+                                                    </div>
+
+                                                </div>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCostChange('USD')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>USD</span>
+                                                    </div>
+                                                </div>
+                                                <div className='flex items-center justify-between p-2 gap-2 mt-1 hover:bg-[#FFF3F9]' onClick={() => handleCostChange('CAD')}>
+                                                    <div className="flex gap-2 items-center">
+                                                        <span>CAD</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        )}
+
                                     </div>
                                 </div>
                             </div>
@@ -220,11 +292,11 @@ function Tax() {
                         <div className="bg-[#FFF5FB] w-full text-xl font-semibold px-6 py-3">
                             Crypto Tax Summary
                         </div>
-                        <div className="bg-[#FFFFFF] px-6 py-5 w-full space-y-2">
+                        <div className="bg-[#FFFFFF] px-6 py-5 w-full space-y-2 text-sm">
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <span>Capital Gain / P & L</span>
-                                    <span><FaInfoCircle /></span>
+                                    <span><CiCircleInfo /></span>
                                 </div>
                                 <div className="">
                                     <span className='text-[#FF6384]'>-₹ 3,952.28</span>
@@ -233,7 +305,7 @@ function Tax() {
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <span>Other Gain (Future, Derivatives Etc)</span>
-                                    <span><FaInfoCircle /></span>
+                                    <span><CiCircleInfo /></span>
                                 </div>
                                 <div className="">
                                     <span className='text-[#FF6384]'>-₹ 103.04</span>
@@ -242,7 +314,7 @@ function Tax() {
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <span>Income</span>
-                                    <span><FaInfoCircle /></span>
+                                    <span><CiCircleInfo /></span>
                                 </div>
                                 <div className="">
                                     <span className=''>₹ 6.29</span>
@@ -251,7 +323,7 @@ function Tax() {
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <span>Cost & Expenses</span>
-                                    <span><FaInfoCircle /></span>
+                                    <span><CiCircleInfo /></span>
                                 </div>
                                 <div className="">
                                     <span className=''>₹ 44.13  </span>
@@ -260,7 +332,7 @@ function Tax() {
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
                                     <span>Gift, Donation & Lost Coins</span>
-                                    <span><FaInfoCircle /></span>
+                                    <span><CiCircleInfo /></span>
                                 </div>
                                 <div className="">
                                     <span className=''>₹ 0.00 </span>
@@ -276,17 +348,24 @@ function Tax() {
                             <span>Download Report</span>
                         </div>
                         <div className="px-6 py-3 flex gap-8">
-                            <div onClick={handleStandardReport}  className="flex items-center gap-2">
-                                <div  className="h-4 w-4 rounded-full border"></div>
-                                <span >Standard Report</span>
+
+                            <div onClick={() => handleSelectReport("standard")} className="flex items-center gap-2 ">
+                                <div className={`h-4 w-4 rounded-full border flex justify-center items-center ${selectReport === "standard" ? "bg-[#A54D79]" : ""}`}>
+                                    <div className={`h-3 w-3 rounded-full border border-white ${selectReport === "standard" ? "bg-[#A54D79]" : ""}`}></div>
+                                </div>
+                                <span>Standard Report</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <div className="h-4 w-4 rounded-full border"></div>
-                                <span >Advanced Report</span>
+
+
+                            <div onClick={() => handleSelectReport("advanced")}  className="flex items-center gap-2  ">
+                                <div className={`h-4 w-4 rounded-full border flex items-center justify-center ${selectReport === "advanced" ? "bg-[#A54D79]" : ""}`}>
+                                    <div className={`h-3 w-3 rounded-full border border-white ${selectReport === "advanced" ? "bg-[#A54D79]" : ""}`}></div>
+                                </div>
+                                <span>Advanced Report</span>
                             </div>
                         </div>
-                        {stander && (
-                            <div className="px-6 py-2 pb-8">
+
+                        {stander && (<div className="px-6 py-2 pb-8">
                             <div className="flex justify-between border-b py-2">
                                 <span>Complete Tax Report</span>
                                 <input type="checkbox" />
@@ -311,13 +390,42 @@ function Tax() {
                                 <span>Tax Filling Data Report</span>
                                 <input type="checkbox" />
                             </div>
-                            
+
                         </div>
                         )}
-                        
+
+                        {advanced && (<div className="px-6 py-2 pb-8">
+                            <div className="flex justify-between border-b py-2">
+                                <span>Complete Tax Report</span>
+                                <input type="checkbox" />
+                            </div>
+                            <div className="flex justify-between border-b py-2">
+                                <span>Buy - Sell Report</span>
+                                <input type="checkbox" />
+                            </div>
+                            <div className="flex justify-between border-b py-2">
+                                <span>Income Summary Report</span>
+                                <input type="checkbox" />
+                            </div>
+                            <div className="flex justify-between border-b py-2">
+                                <span>Transaction history Report</span>
+                                <input type="checkbox" />
+                            </div>
+                            <div className="flex justify-between border-b py-2">
+                                <span>Schedule VDA Report</span>
+                                <input type="checkbox" />
+                            </div>
+                            <div className="flex justify-between border-b py-2">
+                                <span>Tax Filling Data Report</span>
+                                <input type="checkbox" />
+                            </div>
+
+                        </div>
+                        )}
+
 
                         <button className='w-full bg-[#A64D79] text-white py-2'>
-                        Generate Now
+                            Generate Now
                         </button>
                         <div className="flex items-center justify-center py-3">
                             <span><IoMdCopy /></span>
@@ -325,6 +433,64 @@ function Tax() {
                         </div>
 
                     </div>
+
+                    <div className="">
+                        <div className="bg-[#FFF5FB] w-full text-xl font-semibold px-6 py-3">
+                            License for 2024
+                        </div>
+                        <div className="px-6 py-3">
+                            <div className="flex justify-end py-2">
+                                <button className='text-white bg-[#A64D79] px-3 py-2 rounded-md'>
+                                    Building Purchase
+                                </button>
+
+                            </div>
+                            <div className="py-4">
+                                <div className="relative w-full bg-[#F4F4F4] h-1 rounded">
+                                  
+                                    <div
+                                        className="absolute top-0 left-0 h-full bg-[#A54D79] rounded"
+                                        style={{ width: `${prograessPercentage}%` }} 
+                                    ></div>
+                                </div>
+                                
+                                <span className='text-sm'>
+                                    {transaction} of {totalTransaction} Transactions
+                                </span>
+                            </div>
+
+                            <div className="w-full grid grid-cols-3 gap-10">
+                                <div className="border-[#CBD5E1] border-[1px] shadow-lg flex flex-col  px-8 py-5">
+                                    <div className='text-[#A64D79] font-bold text-lg pb-6'>Investor</div>
+                                    <div className='font-semibold text-xl pb-20'>5,000 TXs</div>
+                                    <div className=' text-xl text-[#A64D79] font-bold'>59 $</div>
+                                </div>
+                                <div className="border-[#CBD5E1] border-[1px] shadow-lg flex flex-col  px-8 py-5">
+                                    <div className='text-[#A64D79] font-bold text-lg pb-6'>Trader</div>
+                                    <div className=' pb-20 space-y-2 '>
+                                        <div className='font-semibold text-xl'>25,000 TXs  </div>
+                                        <div className=''>Chat Support: Bugs & Feature </div>
+                                    </div>
+                                    <div className=' text-xl text-[#A64D79] font-bold'>199 $</div>
+                                </div>
+                                <div className="border-[#CBD5E1] border-[1px] shadow-lg flex flex-col  px-8 py-5">
+                                    <div className='text-[#A64D79] font-bold text-lg pb-6'>Professional</div>
+                                    <div className=' pb-20 space-y-2 '>
+                                        <div className='font-semibold text-xl'>350,000 TXs  </div>
+                                        <div className=''>Zoom Support Individua Tax Report help VIP Telegram   </div>
+                                    </div>
+                                    <div className=' text-xl text-[#A64D79] font-bold'>From 899 $</div>
+                                </div>
+
+                            </div>
+
+                            <div className="py-8">
+                                <span>After purchase, any number of document for that year can be generated and downloaded. Subsequent corrections are thus possible without any problem</span>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
